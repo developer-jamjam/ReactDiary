@@ -64,12 +64,20 @@ const App =() => {
     setData(newDiaryList);
   };
 
+  const onEdit = (targetId, newContent) => {
+    setData(
+      data.map((it)=>
+        it.id === targetId ? {...it, content:newContent} : it
+      )
+    );
+  };
+
   let name = "dev_404";
   return (
       <div className="App">
           <h2>Hello React! by.{name}의 일기장</h2>
           <DiaryEditor onCreate={onCreate}/>
-          <DiaryList onRemove={onRemove} diaryList={data} />
+          <DiaryList onRemove={onRemove} onEdit={onEdit} diaryList={data} />
       </div>
   );
 }
