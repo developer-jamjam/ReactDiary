@@ -11,8 +11,6 @@ const DiaryEditor = ({onCreate}) => {
     });
 
     const handleChangeState =(e) => {
-        console.log(e.target.name);
-        console.log(e.target.value);
         setState({
             ...state, //스프레드 연산자 사용하여 펼쳐준다.
             [e.target.name] : e.target.value,

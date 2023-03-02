@@ -57,12 +57,19 @@ const App =() => {
     dataId.current += 1;
     setData([newItem, ...data]);
   };
+
+  const onDelete = (targetId) => {
+    console.log(`${targetId}가 삭제 되었습니다.`);
+    const newDiaryList = data.filter((it) => it.id !== targetId);
+    setData(newDiaryList);
+  };
+
   let name = "dev_404";
   return (
       <div className="App">
           <h2>Hello React! by.{name}의 일기장</h2>
           <DiaryEditor onCreate={onCreate}/>
-          <DiaryList diaryList={data} />
+          <DiaryList onDelete={onDelete} diaryList={data} />
       </div>
   );
 }
