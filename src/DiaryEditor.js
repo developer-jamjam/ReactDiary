@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const DiaryEditor = () => {
-
+    //React에서 Dom요소에 접근을 할 수 있게 해주는 useRef();
+    const authorInput = useRef();
+    const contentArea = useRef();
     const [state, setState] = useState({
         author: "",
         content: "",
@@ -12,26 +14,39 @@ const DiaryEditor = () => {
         console.log(e.target.name);
         console.log(e.target.value);
         setState({
-            ...state,
+            ...state, //스프레드 연산자 사용하여 펼쳐준다.
             [e.target.name] : e.target.value,
         })
     };
     const handleSumbit = () => {
-        console.log(state);
+        if(state.author.length < 1) {
+            authorInput.current.focus();
+            return
+        }
+        if(state.content.length < 5) {
+            contentArea.current.focus();
+            return
+        }
         alert("저장성공");
     };
     return (
         <div className="DiaryEditor">
             <h2>오늘의 일기</h2>
             <div>
-                <input name="author"
-                value={state.author} 
-                onChange={handleChangeState}/>
+                <input 
+                    name="author"
+                    ref={authorInput}
+                    value={state.author} 
+                    onChange={handleChangeState}
+                />
             </div>
             <div>
-                <textarea name="content"
-                value={state.content} 
-                onChange={handleChangeState} />
+                <textarea 
+                    ref={contentArea}
+                    name="content"
+                    value={state.content} 
+                    onChange={handleChangeState} 
+                />
             </div>
             <div>
                 <select 
