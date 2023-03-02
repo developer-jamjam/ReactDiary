@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 
-const DiaryEditor = () => {
+const DiaryEditor = ({onCreate}) => {
     //React에서 Dom요소에 접근을 할 수 있게 해주는 useRef();
     const authorInput = useRef();
     const contentArea = useRef();
@@ -27,7 +27,13 @@ const DiaryEditor = () => {
             contentArea.current.focus();
             return
         }
+        onCreate(state.author,state.content,state.emotion);
         alert("저장성공");
+        setState({
+            author: "",
+            content: "",
+            emotion: 1,
+        })
     };
     return (
         <div className="DiaryEditor">
