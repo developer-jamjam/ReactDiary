@@ -1,4 +1,4 @@
-import React,{useState,useRef, useEffect} from "react";
+import React,{useState, useRef, useEffect} from "react";
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
@@ -49,8 +49,11 @@ const App =() => {
   const dataId = useRef(0);
 
   const getData = async()=> {
-    const res = await fetch(`https://jsonplaceholder.typicode.com/comments`).then((res)=>res.json());
-    const initData = res.slice(0, 20).map((it)=>{
+    const res = await fetch(
+        "https://jsonplaceholder.typicode.com/comments"
+      ).then((res)=>res.json());
+
+    const initData = res.slice(0, 20).map((it) => {
       return {
         author : it.email,
         content : it.body,
@@ -64,8 +67,10 @@ const App =() => {
   } //API 호출
 
   useEffect(()=>{
-    getData();
-  },[])
+    setTimeout(()=> {
+      getData();
+    }, 1500);
+  },[]);
 
   const onCreate = (author,content,emotion) => {
     const create_date = new Date().getTime();
