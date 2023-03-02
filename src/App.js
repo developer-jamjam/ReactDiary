@@ -1,8 +1,10 @@
-import React,{useState,useRef} from "react";
+import React,{useState,useRef, useEffect} from "react";
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
 //import Lifecycle from './Lifecycle';
+
+//https://jsonplaceholder.typicode.com/comments
 
 // const dummyList = [
 //   {
@@ -45,6 +47,25 @@ const App =() => {
   const [data,setData] = useState([]);
 
   const dataId = useRef(0);
+
+  const getData = async()=> {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/comments`).then((res)=>res.json());
+    const initData = res.slice(0,20).map((it)=>{
+      return {
+        author : it.email,
+        content : it.body,
+        emotion : Math.floor(Math.random() * 5 ) + 1,
+        create_date : new Date().getTime(),
+        id : dataId.current++
+      };
+    });
+
+    setData(initData);
+  } //API 호출
+
+  useEffect(()=>{
+    getData();
+  },[])
 
   const onCreate = (author,content,emotion) => {
     const create_date = new Date().getTime();
