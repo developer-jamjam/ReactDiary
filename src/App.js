@@ -2,6 +2,7 @@ import React,{useState,useRef} from "react";
 import './App.css';
 import DiaryEditor from './DiaryEditor';
 import DiaryList from './DiaryList';
+//import Lifecycle from './Lifecycle';
 
 // const dummyList = [
 //   {
