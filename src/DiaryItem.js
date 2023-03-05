@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const DiaryItem = ({
         onEdit,
@@ -9,6 +9,10 @@ const DiaryItem = ({
         emotion,
         id,
     }) => {
+
+        useEffect(()=>{
+            console.log(`${id}번째 item render`)
+        });
         const [isEdit,setIsEdit] = useState(false); 
         const toggleIsEdit = () => setIsEdit(!isEdit); // 호출이 되는 순간 원래 isEdit이 갖고있던 값을 반전연산
 
@@ -75,4 +79,4 @@ const DiaryItem = ({
     )
 }
 
-export default DiaryItem;
+export default React.memo(DiaryItem);
