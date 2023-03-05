@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { DiaryDispatchContext } from './App';
 
 const DiaryItem = ({
-        onEdit,
-        onRemove,
         author,
         content,
         create_date,
@@ -10,9 +9,8 @@ const DiaryItem = ({
         id,
     }) => {
 
-        useEffect(()=>{
-            console.log(`${id}번째 item render`)
-        });
+        const {onRemove, onEdit} = useContext(DiaryDispatchContext);
+
         const [isEdit,setIsEdit] = useState(false); 
         const toggleIsEdit = () => setIsEdit(!isEdit); // 호출이 되는 순간 원래 isEdit이 갖고있던 값을 반전연산
 

@@ -1,10 +1,14 @@
-import React,{ useState, useRef, useEffect} from 'react';
+import React,{ useState, useRef, useEffect, useContext} from 'react';
+import { DiaryDispatchContext } from './App';
 
-const DiaryEditor = ({onCreate}) => {
+const DiaryEditor = () => {
+
+    const {onCreate} = useContext(DiaryDispatchContext);
+
     //React에서 Dom요소에 접근을 할 수 있게 해주는 useRef();
-    useEffect(()=>{console.log("DiaryEditor render")})
     const authorInput = useRef();
     const contentArea = useRef();
+
     const [state, setState] = useState({
         author: "",
         content: "",
